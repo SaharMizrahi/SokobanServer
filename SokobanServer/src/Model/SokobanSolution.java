@@ -42,7 +42,7 @@ public class SokobanSolution
 						numOfChars++;
 					else
 					{
-						compresedSolution+=prevCh+numOfChars;
+						compresedSolution+=""+prevCh+""+numOfChars+" ";
 						prevCh=currentCh;
 						numOfChars=1;
 					}
@@ -53,6 +53,8 @@ public class SokobanSolution
 					prevCh=currentCh;
 				}
 			}
+			compresedSolution+=""+prevCh+""+numOfChars+" ";
+
 			return compresedSolution;
 		}
 		else

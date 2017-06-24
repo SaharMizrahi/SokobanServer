@@ -3,14 +3,11 @@ package View;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import Model.SokobanSolution;
-import Model.SokobanSolver;
 
 
 public class MyServer implements ViewInterface {
@@ -19,7 +16,7 @@ public class MyServer implements ViewInterface {
 	private int port;
 	private boolean stop=false;
 	private ThreadPoolExecutor pool;
-	
+	ServerSocket server;
 
 
 
@@ -39,9 +36,8 @@ public class MyServer implements ViewInterface {
 	@Override
 	public boolean runServer() {
 		// TODO Auto-generated method stub
-		
 
-			ServerSocket server;
+			
 			try {
 				server = new ServerSocket(port);
 				System.out.println("server is running");
@@ -111,6 +107,8 @@ public class MyServer implements ViewInterface {
 	public int getPort() {
 		return port;
 	}
+	
+	
 }
 
 

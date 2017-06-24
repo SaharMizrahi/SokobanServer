@@ -9,7 +9,7 @@ import StripsLib.Strips;
 public class SokobanSolver
 {
 	private SokobanSolution solution;
-	public SokobanSolution solveLevel(Level2D level)
+	public SokobanSolution solve2DLevel(Level2D level)
 	{
 		PlannableSokoban ps=new PlannableSokoban(level);
 		Strips strips=new Strips();
