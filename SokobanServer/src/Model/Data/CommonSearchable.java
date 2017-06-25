@@ -1,4 +1,4 @@
-package Model;
+package Model.Data;
 
 import Model.Data.Level2D;
 import Model.Data.Position;

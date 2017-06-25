@@ -13,12 +13,12 @@ import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import Model.LevelCompressorAndGenerator;
-import Model.SokobanSolution;
-import Model.SokobanSolver;
 import Model.Data.Item;
 import Model.Data.Level;
 import Model.Data.Level2D;
 import Model.Data.LevelLoaderFactory;
+import Model.Data.SokobanSolution;
+import Model.Data.SokobanSolver;
 /** A Class that implements ClientHandler interface
  * it has String that refers to the client command, one string that refers the message to the user
  * 

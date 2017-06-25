@@ -1,4 +1,4 @@
-package Model;
+package Model.Data;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class SokobanSolution
 						numOfChars++;
 					else
 					{
-						compresedSolution+=""+prevCh+""+numOfChars+" ";
+						compresedSolution+=""+prevCh+""+numOfChars+"-";
 						prevCh=currentCh;
 						numOfChars=1;
 					}
@@ -53,8 +53,8 @@ public class SokobanSolution
 					prevCh=currentCh;
 				}
 			}
-			compresedSolution+=""+prevCh+""+numOfChars+" ";
-
+			compresedSolution+=""+prevCh+""+numOfChars;
+			System.out.println(compresedSolution);
 			return compresedSolution;
 		}
 		else
