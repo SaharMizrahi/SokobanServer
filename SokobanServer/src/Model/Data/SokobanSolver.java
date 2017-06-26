@@ -19,8 +19,10 @@ public class SokobanSolver
 			List<PlanAction> list=strips.plan(ps);
 			solution=new SokobanSolution(list);
 		}
-		
-		return solution;
+		if(solution==null)
+			return null;
+		else 
+			return solution;
 		
 	}
 

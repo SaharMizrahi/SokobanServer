@@ -10,26 +10,34 @@ import Model.Data.SokobanSolver;
 public class ServerModel  extends Observable implements ModelInterface   {
 	private String solution;
 	private LevelCompressorAndGenerator lcag;
-	/***********************/
-	/***implemnted methods**/
-	/***********************/
+	private String dbData;
+	private boolean isSolution;
+	private boolean isDB;
+
+	public ServerModel() {
+		super();
+		this.solution = "block";
+		this.lcag = new LevelCompressorAndGenerator();
+	}
+	/*********************************/
+	/******Implemented Methods********/
+	/*********************************/
+	@Override
+	public void SearchForSolution(String levelDescription) {
+		// TODO Auto-generated method stub
+		String res=askForSolution(levelDescription);
+		if(res.compareTo("block")==0)
+			res=solveLevel(levelDescription);
+		setSolution(res);
+
+	}
+
+	
+	
 
 	@Override
-	public String getLevelSolution(String levelDescription) {
+	public void SearchForDBData(String data) {
 		// TODO Auto-generated method stub
-		String solution="";
-		solution=askForSolution(levelDescription);//ask from web service
-		if(solution!=null)
-			return solution;
-		else
-		{
-			solution=searchSolution(levelDescription);//solve by himself
-			if(solution!=null)
-				return solution;
-			else
-				return "block";
-		}
-
 		
 	}
 	@Override
@@ -37,47 +45,73 @@ public class ServerModel  extends Observable implements ModelInterface   {
 		// TODO Auto-generated method stub
 		
 	}
-	/***********************/
-	/**private methids******/
-	/***********************/
-
 	private String askForSolution(String levelDescription) {
 		// TODO Auto-generated method stub
-		//open tcp socket with web service
-		//send "get <levelDescription> "
-		//return answer
-		//close socket
-		return "";
+		
+		return "block";
 
 	}
-
-	
-	private String searchSolution(String levelDescription) {
+	@Override
+	public String getDBData() {
 		// TODO Auto-generated method stub
-		SokobanSolver solver=new SokobanSolver();
-		Level level=lcag.generate(levelDescription);
-		SokobanSolution solution=solver.solve2DLevel(level);
-		
-		
-		return solution.getCompresedSolution();
+		return null;
 	}
-
-
-
-	/***********************/
-	/***getters and setters*/
-	/***********************/
-
-
+	@Override
 	public String getSolution() {
-		return solution;
+		// TODO Auto-generated method stub
+		return null;
 	}
-
+	/********************************/
+	/********getters and setters****/
+	/********************************/
+	public boolean isSolution()
+	{
+		return isSolution;
+	}
+	public boolean isDB()
+	{
+		return isDB;
+	}
+	public void setDBFlag(boolean bool)
+	{
+		isDB=bool;
+	}
+	public void setSolutionFlag(boolean bool)
+	{
+		isSolution=bool;
+	}
+	public void setDbData(String dbData) {
+		this.dbData = dbData;
+		isDB=true;
+		setChanged();
+		notifyObservers();
+	}
 	public void setSolution(String solution) {
 		this.solution = solution;
+		isSolution=true;
+		setChanged();
 		notifyObservers();
 	}
 
+	/**********************************/
+	/*************private methods******/
+	/**********************************/
 
+	private String solveLevel(String levelDescription) {
+		// TODO Auto-generated method stub
+		Level level=lcag.generate(levelDescription);
+		SokobanSolver solver=new SokobanSolver();
+		SokobanSolution solution=solver.solve2DLevel(level);
+		if(solution==null)
+		{
+			return "block";
+		}
+		else
+			return solution.getCompresedSolution();
+	}
+
+
+
+	
 
 }

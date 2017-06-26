@@ -19,6 +19,7 @@ import Model.Data.Level2D;
 import Model.Data.LevelLoaderFactory;
 import Model.Data.SokobanSolution;
 import Model.Data.SokobanSolver;
+import ViewModel.ViewModelInterface;
 /** A Class that implements ClientHandler interface
  * it has String that refers to the client command, one string that refers the message to the user
  * 
@@ -28,49 +29,15 @@ import Model.Data.SokobanSolver;
  */
 public class MyClientHandler extends Observable implements ClientHandler {
 
-	LevelCompressorAndGenerator cg;
+	private PrintWriter pw;
+	private BufferedReader br;
+	
+	
 
-	private String solveLevel(Level level)
-	{
-		SokobanSolver solver=new SokobanSolver();
-		SokobanSolution solution=null;
-		if(level instanceof Level2D)
-		{
-			solution=solver.solve2DLevel((Level2D) level);
-			return solution.getCompresedSolution();
-		}
-
-		return null;
-	}
-	private String getSolutionFromDB(String levelName)
-	{
-		return "unDone";
-		
-	}
 	/**
 	 * The codes of the method from ClientHandler interface
 	 */
-	@Override
-	public void handleClient(InputStream in, OutputStream out) {
-		// TODO Auto-generated method stub
-		Level lev=null;
-		BufferedReader br=new BufferedReader(new InputStreamReader(in));
-		PrintWriter pr=new PrintWriter(out);
-		String s="",temp="";
-		try {
-			s=br.readLine();
-			lev=cg.generate(s);
-			pr.println(solveLevel(lev));
-			pr.flush();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-	}
-
+	
 
 
 	
@@ -80,10 +47,33 @@ public class MyClientHandler extends Observable implements ClientHandler {
 	/**
 	 * Default constructor
 	 */
-	public MyClientHandler() {
+	public MyClientHandler(InputStream in,OutputStream out) {
 		super();
 		// TODO Auto-generated constructor stub
-		cg=new LevelCompressorAndGenerator();
+		br=new BufferedReader(new InputStreamReader(in));
+		pw=new PrintWriter(out);
+		
+
+	}
+
+	@Override
+	public String getRequest() {
+		// TODO Auto-generated method stub
+		try {
+			String s=br.readLine();
+			return s;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void setReturnedAnswer(String str) {
+		// TODO Auto-generated method stub
+		pw.println(str);
+		pw.flush();
 	}
 
 

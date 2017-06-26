@@ -11,12 +11,9 @@ import java.io.OutputStream;
  */
 
 public interface ClientHandler  {
-	/**
-	 * start communicate
-	 * @param in The socket's input
-	 * @param out the socket's output
-	 */
-	public void handleClient(InputStream in,OutputStream out);
+
+	String getRequest();
+	void setReturnedAnswer(String str);
 	
 
 }
