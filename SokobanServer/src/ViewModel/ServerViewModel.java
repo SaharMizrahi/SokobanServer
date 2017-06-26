@@ -26,9 +26,7 @@ public class ServerViewModel extends Observable implements ViewModelInterface,Ob
 		String str=currentClientHandler.getRequest();
 		if(str!=null)
 		{
-			System.out.println(str);
-			/*String splittedStr[]=str.split("-");
-			System.out.println(splittedStr[0]);
+			String splittedStr[]=str.split("-");
 			switch(splittedStr[0])
 			{//resolve what client want
 			case "solve":
@@ -47,7 +45,7 @@ public class ServerViewModel extends Observable implements ViewModelInterface,Ob
 					start();
 					
 				}
-			}*/
+			}
 			
 		}
 	}

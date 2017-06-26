@@ -2,7 +2,6 @@ package Model.Model;
 
 import java.util.Observable;
 
-import Model.LevelCompressorAndGenerator;
 import Model.Data.Level;
 import Model.Data.SokobanSolution;
 import Model.Data.SokobanSolver;
@@ -28,6 +27,7 @@ public class ServerModel  extends Observable implements ModelInterface   {
 		String res=askForSolution(levelDescription);
 		if(res.compareTo("block")==0)
 			res=solveLevel(levelDescription);
+		System.out.println("result: "+res);
 		setSolution(res);
 
 	}
